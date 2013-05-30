@@ -3,3 +3,9 @@ div#sidebar
     h2 = t '.title'
     p = t '.description_paragraph_1'
     p = t '.description_paragraph_2'
+  -if @university
+    -contacts = User.where(university_id: @university._id, contactable: true)
+    -unless contacts.empty?
+      .contacts
+        h2 = "Lisätietoa"
+        = contacts.map{|contact| content_tag :li, "#{contact.full_name}: #{contact.email}"}.join.html_safe

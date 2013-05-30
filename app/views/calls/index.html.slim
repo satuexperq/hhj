@@ -21,3 +21,7 @@ div#open-calls
         .open-calls
           = render @calls
         a.show-more.btn.unimplemented(href='#') Näytä lisää
+div#contacts
+  - User.where(university_id: @university._id, contactable: true).each do |user|
+    = content_tag :li, "#{user.full_name}: #{user.email}"
+  end
