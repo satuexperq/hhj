@@ -1,0 +1,19 @@
+.modal#send-application
+  .content
+    h2
+      span Käyttäjän tiedot
+      a.close-modal(href='#')
+    .item-block
+      .applicant-details
+        p.name = @user.full_name.force_encoding('UTF-8')
+        p.email = @user.email
+        p.phone = seems_valid_for_phone?(@user.phone) ? @user.phone: "Puhelinnumero puuttuu tai on liian lyhyt. "
+    = form_for @user, url: user_path(user_id: @user._id, format: :js, call_id: @call._id ), method: :put, class: 'send-application' do |f|
+      .item-row
+        label
+          | Puhelinnumero:
+          = f.text_field :phone
+
+      .button-row
+        a.cancel.close-modal.btn(href='#') = t 'modals.cancel'
+        input.submit.js-submit.btn(type='submit' value="Jatka")

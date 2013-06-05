@@ -17,3 +17,13 @@
 /public/assets
 .DS_Store
 *.orig
+
+# Ignore IDE files
+#RubyMine:
+.idea
+
+halloped_development*
+halloped_test*
+local*
+mongod.lock
+journal

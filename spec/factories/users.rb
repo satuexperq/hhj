@@ -53,5 +53,13 @@ FactoryGirl.define do
       principal_name 'xerxes@ay.fi'
       role       :role_union_employee
     end
+    factory :no_phone_student do
+      _id        '4f7963bf91bc2bc1f6000007'
+      first_name 'Stu'
+      last_name  'Dent'
+      email      'stu.dent@x.fi'
+      phone      '0'
+      principal_name 'stu.dent@sty.fi'
+    end
   end
 end

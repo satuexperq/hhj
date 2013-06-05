@@ -45,6 +45,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'debugger'
   gem 'rspec_multi_matchers'
   gem 'cucumber-rails', require: false
   gem 'capybara'

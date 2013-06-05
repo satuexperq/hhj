@@ -48,3 +48,18 @@ When %r/^I fill in form '([^']*)':$/ do |form_title, table|
 end
 
 
+When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+  label_xpath = ".//label[normalize-space(text()) = '#{field}']"
+  id_xpath = ".//*[@id = '#{field}']"
+  node = find(:xpath, "#{label_xpath} | #{id_xpath}")
+  case node.tag_name
+    when 'label'
+      find_by_id(node['for']).set(value)
+    when 'input', 'textarea'
+      node.set(value)
+    else
+      raise "Unknown element type #{node.tag_name}"
+  end
+end
+
+

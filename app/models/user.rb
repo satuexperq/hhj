@@ -25,7 +25,7 @@ class User
   end
 
   def self.update_or_create_from_env(env)
-    attrs = env_to_attributes(env)
+    attrs = env_to_attributes(env).delete_if{|key, value| value.nil?}
     principal_name = attrs[:principal_name]
     domain = attrs[:university_domain]
     return nil unless principal_name and domain
