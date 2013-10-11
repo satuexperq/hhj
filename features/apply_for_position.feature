@@ -98,7 +98,8 @@ Feature: Applying for a position
     Then I should see dialog 'Hakemus lähetetty' with text '3 vuoden kokemus Hallopedina toimimisesta':
       | label | value         |
       | Haen  | Varajäseneksi |
-    Then "test@test.com" should receive an email
+    Then "test@test.com" should receive an email with the following body:
+    ||
     And I press 'Ok'
     Then I should see "Tiina Miettinen" among the applications listing
 
@@ -117,11 +118,17 @@ Feature: Applying for a position
       | Haen       | Varajäseneksi                             |
       | Perustelut | 3 vuoden kokemus Hallopedina toimimisesta |
       | Oppiarvo   | VTT                                       |
-
+    And I choose to send an email reminder to "test@test.com"
     And I select "Anna Kainulainen" as the member I want to be deputy of
     And I press 'Lähetä' within dialog
     And I press 'Ok'
     Then I should see "Anna Kainulainen (jäsen, varajäsen: Tiina Miettinen)" among the applications listing
+    Then "test@test.com" should receive an email
+    Then save and open all text emails
+    Then "test@test.com" should receive an email with the following body:
+      """
+      Tiina Miettine
+      """
   #you cannot recommend your own applications and applications without a deputy. Thus:
     Then I should see 0 buttons with text "Suosittele"
 
